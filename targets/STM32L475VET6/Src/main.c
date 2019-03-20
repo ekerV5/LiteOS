@@ -16,6 +16,9 @@
 #include "sys.h"
 #include "usart.h"
 
+#include "test.h"
+#include "drv_led.h"
+
 /**
  * @brief 硬件初始化，LiteOS内核初始化之前调用。
  *
@@ -27,6 +30,7 @@ static void hardware_init(void)
 {
     SystemClock_Config(); //时钟初始化
     uart_init(115200);    //串口初始化
+    led_init();           //LED初始化
     printf("Hardware init end.\n");
 }
 
@@ -40,6 +44,8 @@ static void hardware_init(void)
 static UINT32 app_init(void)
 {
     printf("Application init.\n");
+    
+    app_test_init();
     
     return LOS_OK;
 }

@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32L475xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Src;..\OS_CONFIG;..\Drivers\CMSIS;..\Drivers\STM32L4xx_HAL_Driver\Inc;..\..\..\arch\arm\arm-m\include;..\..\..\kernel\include;..\..\..\kernel\base\include;..\..\..\kernel\extended\include</IncludePath>
+              <IncludePath>..\Src;..\OS_CONFIG;..\Drivers;..\Drivers\CMSIS;..\Drivers\STM32L4xx_HAL_Driver\Inc;..\..\..\arch\arm\arm-m\include;..\..\..\kernel\include;..\..\..\kernel\base\include;..\..\..\kernel\extended\include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -412,10 +412,22 @@
               <FileType>1</FileType>
               <FilePath>..\Src\system_stm32l4xx.c</FilePath>
             </File>
+            <File>
+              <FileName>test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\test.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>drv_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\drv_led.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>os_config</GroupName>
