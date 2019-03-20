@@ -423,6 +423,11 @@
           <GroupName>drivers</GroupName>
           <Files>
             <File>
+              <FileName>drv_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\drv_key.c</FilePath>
+            </File>
+            <File>
               <FileName>drv_led.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Drivers\drv_led.c</FilePath>

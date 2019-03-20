@@ -10,7 +10,41 @@
 
 #include "test.h"
 
+//#define KEY_TEST_ENABLE
 //#define LED_TEST_ENABLE
+
+/* KEY 测试代码 */
+#ifdef KEY_TEST_ENABLE
+#include "drv_key.h"
+
+static void key_process(void)
+{
+    printf("Key pressed.\r\n");
+    __HAL_GPIO_EXTI_CLEAR_IT(PIN_KEY_0);
+    __HAL_GPIO_EXTI_CLEAR_IT(PIN_KEY_1);
+    __HAL_GPIO_EXTI_CLEAR_IT(PIN_KEY_2);
+    __HAL_GPIO_EXTI_CLEAR_IT(PIN_KEY_WKUP);
+}
+
+static UINT32 key_irq_init(void)
+{
+    UINTPTR uvIntSave;
+    
+    printf("Key irq init.\r\n");
+    
+    uvIntSave = LOS_IntLock();
+    
+    key_init();
+    
+    //注册中断处理函数
+    LOS_HwiCreate(EXTI9_5_IRQn, 2, 0, key_process, 0);
+    LOS_HwiCreate(EXTI15_10_IRQn, 2, 0, key_process, 0);
+    
+    LOS_IntRestore(uvIntSave);
+    
+    return LOS_OK;
+}
+#endif
 
 /* LED 测试代码 */
 #ifdef LED_TEST_ENABLE
@@ -61,6 +95,10 @@ static UINT32 task_led_create(void)
 UINT32 app_test_init(void)
 {
     UINT32 ret = LOS_OK;
+
+#ifdef KEY_TEST_ENABLE
+    key_irq_init();
+#endif
 
 #ifdef LED_TEST_ENABLE    
     ret = task_led_create();
